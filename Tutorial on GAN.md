@@ -2,7 +2,7 @@
 
 ## 1. 1GAN基本架构示意图
 
-![1.webp](assets/GAN.webp)
+![GAN.webp](https://github.com/ZAC0713/Handwritten-Digit-Image-Generation-Based-on-GAN-and-MINST-Datasets/blob/master/assets/GAN.webp)
 
 * 我们可以看到，GAN的网络架构十分简单，主要由**生成器G**(Generative Network)和**判别器D**(Discriminative Network)以及最后的损失函数组成
 * 在训练过程中，**​生成器G的目标就是尽量生成真实的图片去欺骗判别器D。而D的目标就是尽量把G生成的图片和真实的图片分别开来。​**这样，G和D构成了一个动态的“博弈过程”。
