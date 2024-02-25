@@ -14,7 +14,7 @@
 * 生成器架构：可以用全连接层，也可以用卷积（DCGAN）。代码里用**四层全连接层FC**，简单一点，但效果肯定没有卷积好
 * 生成器的输入与输出：输入为一个**自设定维度（假设100）的垃圾特征向量（内容随意，可以随机初始化）**，通过几个全连接层以后**输出一个shape=（28，28，1）的张量（即一个单通道且为随机生成784像素点的图片）**,这个输出的**fake picture应该和real picture（ground truth）的shape相同**，所以需要在全连接层的最后一层**指定输出的维度**
 * 生成器中的全连接层使用**leaky_relu**作为激活函数
-* 数据流维度变化：100-128（第一层FC）,128-256（第二层FC）,256-512（第三层FC）,512-784(**784为real picture的像素点数量$28\times28\times1$**)（第四层FC）
+* 数据流维度变化：100-128（第一层FC）,128-256（第二层FC）,256-512（第三层FC）,512-784(**784为real picture的像素点数量28✖28✖1**)（第四层FC）
 
 ```
 # -----------------
@@ -68,9 +68,9 @@
 * 输出的特征先通过sigmoid函数做scaling，然后输入到二分类损失函数BCEloss计算损失值，下图是BCEloss的方程
   ![BCEloss.png](assets/BCEloss.png)
 
-  1.$t[i]$为一张picture对应的标签valid(1)或fake(0)
-  2.$o[i]$为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
-  3.由于$o[i]$与$1-o[i]$都处在区间[0,1]内，所以求和符号内部求得为负数，故在求各样本平均损失值后应该添加符号
+  1.t[i]为一张picture对应的标签valid(1)或fake(0)
+  2.o[i]为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
+  3.由于o[i]与1-o[i]都处在区间[0,1]内，所以求和符号内部求得为负数，故在求各样本平均损失值后应该添加符号
 * BCEWithLogistLoss为：这个损失函数**直接在内部就通过sigmoids做scaling了，不需要自己在做了**，可以在gan.py以下代码中调整损失函数类别：
   `adversarial_loss = torch.nn.BCELoss() # torch.nn.BCEWithLogitsLoss`
 
@@ -122,5 +122,6 @@
   4.G中使用ReLU作为激活函数，最后一层使用tanh
   5.D中使用LeakyReLU作为激活函数
 * DCGAN的网络示意图：
+  
   ![DCGAN.jpg](assets/DCGAN.jpg)
 
