@@ -2,7 +2,7 @@
 
 ## 1. 1GAN基本架构示意图
 
-![GAN.webp](https://github.com/ZAC0713/Handwritten-Digit-Image-Generation-Based-on-GAN-and-MINST-Datasets/blob/master/assets/GAN.webp)
+![GAN.webp](https://github.com/ZAC0713/Handwritten-Digit-Image-Generation-Based-on-GAN-and-MINST-Datasets/blob/master/assets)
 
 * 我们可以看到，GAN的网络架构十分简单，主要由**生成器G**(Generative Network)和**判别器D**(Discriminative Network)以及最后的损失函数组成
 * 在训练过程中，**​生成器G的目标就是尽量生成真实的图片去欺骗判别器D。而D的目标就是尽量把G生成的图片和真实的图片分别开来。​**这样，G和D构成了一个动态的“博弈过程”。
@@ -66,7 +66,8 @@
 ### 1.4.1 损失函数介绍
 
 * 输出的特征先通过sigmoid函数做scaling，然后输入到二分类损失函数BCEloss计算损失值，下图是BCEloss的方程
-  ![2.png](assets/BCEloss.png?t=1708675301036)
+  ![BCEloss.png](master/assets)
+
   1.$t[i]$为一张picture对应的标签valid(1)或fake(0)
   2.$o[i]$为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
   3.由于$o[i]$与$1-o[i]$都处在区间[0,1]内，所以求和符号内部求得为负数，故在求各样本平均损失值后应该添加符号
