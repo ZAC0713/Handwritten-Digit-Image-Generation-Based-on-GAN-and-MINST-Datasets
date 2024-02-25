@@ -66,7 +66,7 @@
 ### 1.4.1 损失函数介绍
 
 * 输出的特征先通过sigmoid函数做scaling，然后输入到二分类损失函数BCEloss计算损失值，下图是BCEloss的方程
-  ![BCEloss.png](assets/BCEloss/png)
+  ![BCEloss.png](assets/BCEloss.png)
 
   1.$t[i]$为一张picture对应的标签valid(1)或fake(0)
   2.$o[i]$为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
@@ -107,8 +107,10 @@
 ## 1.7 结果展示
 
 * 本项目在MNIST数据集上训练了300epoch，得出生成图像保存在images目录中，下面是一个对比样例，对比了训练前期和后期的生成图像：
+
   ![400.png](assets/result1.png)
   ![138400.png](assets/result2.png)
+  
   可见，在经过300epoch的训练后，生成器所生成的图像已经非常清晰易识别且无噪音
 
 # 2.DCGAN架构
