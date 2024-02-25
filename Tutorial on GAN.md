@@ -71,11 +71,11 @@
 * 输出的特征先通过sigmoid函数做scaling，然后输入到二分类损失函数BCEloss计算损失值，下图是BCEloss的方程
   ![BCEloss.png](assets/BCEloss.png)
 
-  1.*t[i]*为一张picture对应的标签valid(1)或fake(0)
+  1.t[i]为一张picture对应的标签valid(1)或fake(0)
   
-  2.*o[i]*为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
+  2.o[i]为一张图片由判别器输出的prediction值通过sigmoid函数进行scaling化后得出的，处在区间[0,1]内的一个特征值
   
-  3.由于*o[i]*与*1-o[i]*都处在区间[0,1]内，所以求和符号内部求得为负数，故在求各样本平均损失值后应该添加符号
+  3.由于o[i]与1-o[i]都处在区间[0,1]内，所以求和符号内部求得为负数，故在求各样本平均损失值后应该添加符号
   
 * BCEWithLogistLoss为：这个损失函数**直接在内部就通过sigmoids做scaling了，不需要自己在做了**，可以在gan.py以下代码中调整损失函数类别：
   `adversarial_loss = torch.nn.BCELoss() # torch.nn.BCEWithLogitsLoss`
@@ -130,11 +130,17 @@
 # 2.DCGAN架构
 
 * DCGAN将CNN与GAN相结合，它只是把上述GAN中的G和D内部由全连接层FC换成了两个卷积神经网络（CNN），并对卷积神经网络的结构做了一些改变，以提高样本的质量和收敛的速度，这些改变有：
-  1.取消所有pooling层。G网络中使用转置卷积（transposed convolutional layer）进行上采样，D网络中用加入stride（卷积步长）的卷积代替pooling。
+  
+  1.取消所有pooling层。G网络中使用转置卷积（transposed convolutional layer）进行上采样，D网络中用加入stride（卷积步长）的卷积代替pooling
+
   2.在D和G中均使用batch normalization
+  
   3.去掉FC层，使网络变为全卷积网络
+  
   4.G中使用ReLU作为激活函数，最后一层使用tanh
+  
   5.D中使用LeakyReLU作为激活函数
+  
 * DCGAN的网络示意图：
   
   ![DCGAN.jpg](assets/DCGAN.jpg)
